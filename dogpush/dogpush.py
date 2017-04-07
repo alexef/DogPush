@@ -191,6 +191,8 @@ def get_local_monitors():
                     raise DogPushException("'alerts' must be a list of alerts.")
                 default_team = r.get('team')
                 for monitor in r['alerts']:
+                    if monitor.get('disabled'):
+                        continue
                     _check_monitor(monitor, filename)
                     monitor = _canonical_monitor(monitor,
                                                  filename=filename,
